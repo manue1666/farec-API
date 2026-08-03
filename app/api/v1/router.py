@@ -1,1 +1,4 @@
-# Aquí se agruparán todas las rutas de la versión 1.
+from fastapi import APIRouter
+
+
+api_router = APIRouter()
