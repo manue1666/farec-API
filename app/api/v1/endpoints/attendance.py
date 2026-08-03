@@ -1,0 +1,1 @@
+# Aquí irá el registro de entrada y salida con reconocimiento facial.

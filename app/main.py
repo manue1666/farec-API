@@ -1,0 +1,1 @@
+# Aquí vivirá el arranque principal de FastAPI y el registro de routers.

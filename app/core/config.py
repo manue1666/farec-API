@@ -1,0 +1,1 @@
+# Aquí se definirán las variables de entorno, settings y configuración general.

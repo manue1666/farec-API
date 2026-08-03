@@ -1,0 +1,1 @@
+# Configuración central y utilidades globales de la aplicación.

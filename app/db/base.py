@@ -1,0 +1,1 @@
+# Aquí se centralizará la importación de modelos para migraciones.

@@ -1,0 +1,1 @@
+# Capa de API versionada y dependencias compartidas.

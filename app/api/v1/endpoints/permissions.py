@@ -1,0 +1,1 @@
+# Aquí irá la administración e historial de permisos.

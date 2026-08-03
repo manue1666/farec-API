@@ -1,0 +1,1 @@
+# Aquí se configurará la conexión a PostgreSQL y la sesión de base de datos.

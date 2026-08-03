@@ -1,0 +1,1 @@
+# Modelo de usuario y relación con su biometría facial.

@@ -1,0 +1,1 @@
+# Capa de base de datos: sesión, base declarativa y soporte de migraciones.
