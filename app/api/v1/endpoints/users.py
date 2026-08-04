@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 
 from app.api.deps import get_db
 from app.models.user import User
+from app.schemas.face_verification import FaceVerificationResult
 from app.schemas.user import UserRead
 from app.services.face_verification import face_verification_service
 
@@ -54,3 +55,12 @@ def append_face_dataset(
 
 	records = face_verification_service.ingest_user_dataset(db, user.id, images)
 	return {"user_id": str(user.id), "stored_samples": len(records)}
+
+
+@router.post("/verify-face", response_model=FaceVerificationResult)
+def verify_face(
+	image: UploadFile = File(...),
+	db: Session = Depends(get_db),
+) -> FaceVerificationResult:
+	result = face_verification_service.verify_face(db, image)
+	return FaceVerificationResult.model_validate(result)
