@@ -43,6 +43,46 @@ def create_user(
 	return user
 
 
+@router.patch("/{user_id}", response_model=UserRead)
+def update_user(
+	user_id: UUID,
+	email: str | None = Form(default=None),
+	full_name: str | None = Form(default=None),
+	department: str | None = Form(default=None),
+	is_admin: bool | None = Form(default=None),
+	db: Session = Depends(get_db),
+) -> User:
+	user = db.get(User, user_id)
+	if user is None:
+		raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
+
+	if email is not None:
+		existing_user = db.scalar(select(User).where(User.email == email, User.id != user_id))
+		if existing_user is not None:
+			raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Ya existe un usuario con ese correo")
+		user.email = email
+	if full_name is not None:
+		user.full_name = full_name
+	if department is not None:
+		user.department = department
+	if is_admin is not None:
+		user.is_admin = is_admin
+
+	db.flush()
+	db.refresh(user)
+	return user
+
+
+@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(user_id: UUID, db: Session = Depends(get_db)) -> None:
+	user = db.get(User, user_id)
+	if user is None:
+		raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
+
+	db.delete(user)
+	db.flush()
+
+
 @router.post("/{user_id}/face-dataset", status_code=status.HTTP_201_CREATED)
 def append_face_dataset(
 	user_id: UUID,
