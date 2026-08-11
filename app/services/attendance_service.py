@@ -1,1 +1,0 @@
-# Aquí irá la lógica de negocio para entradas, salidas e historiales.
